@@ -1,29 +1,8 @@
-import express from "express";
-import cors from "cors";
+import { app } from "./app.js";
+import dotenv from "dotenv";
 
-const app = express();
-
-const allowedOrigins = [
-  "http://localhost:3000/",
-  "https://drugboard.ai/"
-];
-
-// CORS options
- const corsOptions = {
-  origin: (origin, callback) => {
-    if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
-
-app.get("/", (req, res) => {  
-  res.send("Hello World");
+dotenv.config({
+  path: "./.env"
 });
 
 app.listen(5000, () =>{
